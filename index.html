@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 20/10 💗</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Mali", cursive;
+            background: linear-gradient(135deg, #fffafa, #ffe4ec, #fff0f5);
+            color: #c2185b;
+            padding: 25px 15px 100px;
+        }
+
+        /* Tiêu đề */
+        .header {
+            text-align: center;
+            margin: 10px auto 30px;
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 12px;
+            color: #d81b60;
+            text-shadow: 0 3px 10px #ffc1d6;
+        }
+
+        .header p {
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            line-height: 1.8;
+        }
+
+        /* Lưới 10 ảnh: 5 cột, 2 hàng */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            position: relative;
+            cursor: pointer;
+            border: 3px solid white;
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.18);
+            aspect-ratio: 1 / 1;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
+        }
+
+        .photo-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-card .number {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px 0;
+            background: rgba(194, 24, 91, 0.75);
+            color: white;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* Lớp nền popup */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(40, 10, 25, 0.65);
+            backdrop-filter: blur(6px);
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        /* Hộp lời chúc */
+        .popup {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 25px;
+            border: 3px solid white;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ffffff, #fff0f5);
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(216, 27, 96, 0.4);
+            animation: popupShow 0.35s ease;
+        }
+
+        @keyframes popupShow {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            z-index: 2;
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            background: #d81b60;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .popup h2 {
+            font-size: 1.4rem;
+            margin: 10px 0 18px;
+            padding: 0 25px;
+            color: #d81b60;
+        }
+
+        .popup img {
+            display: block;
+            width: 100%;
+            max-height: 55vh;
+            object-fit: contain;
+            margin: 0 auto 20px;
+            border: 3px solid white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .popup p {
+            color: #c2185b;
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .bottom-message {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .bottom-gif {
+            display: block;
+            width: 100px;
+            max-width: 25vw;
+            margin: 10px auto 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 8px 40px;
+            }
+
+            .header {
+                margin-bottom: 20px;
+            }
+
+            .gallery {
+                gap: 7px;
+            }
+
+            .photo-card {
+                border-width: 2px;
+                border-radius: 9px;
+            }
+
+            .photo-card .number {
+                font-size: 0.65rem;
+                padding: 3px 0;
+            }
+
+            .popup {
+                padding: 20px 15px;
+                border-radius: 20px;
+            }
+
+            .popup h2 {
+                font-size: 1.2rem;
+            }
+
+            .popup p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>💗 Chúc mừng ngày 20/10 💗</h1>
+        <p>
+            Gửi bé yêu của anh 🌷<br>
+            Bấm vào từng tấm ảnh để mở lời chúc nhaaa 💌
+        </p>
+    </header>
+
+    <!-- 10 ảnh: 5 ảnh mỗi hàng -->
+    <main class="gallery" id="gallery"></main>
+
+    <div class="bottom-message">
+        <p>Chúc bé luôn xinh đẹp, vui vẻ và hạnh phúc nhéee 💕</p>
+        <img src="./assets/mewmew.gif" alt="Mèo dễ thương" class="bottom-gif">
+    </div>
+
+    <!-- Popup ảnh lớn và lời chúc -->
+    <div class="overlay" id="overlay">
+        <section class="popup" role="dialog"
+                 aria-modal="true" aria-labelledby="popupTitle">
+
+            <button class="close-btn" id="closeBtn"
+                    aria-label="Đóng lời chúc">&times;</button>
+
+            <h2 id="popupTitle">Lời chúc dành cho bé 💗</h2>
+
+            <img id="popupImage" src="" alt="Ảnh kỷ niệm">
+
+            <p id="popupMessage"></p>
+        </section>
+    </div>
+
+    <!-- Nhạc nền -->
+    <audio id="player" src="./assets/a.mp3" loop></audio>
+
+    <script>
+        // Sửa ảnh và lời chúc tại đây.
+        // Có thể đổi nội dung tùy ý, giữ nguyên đường dẫn ảnh.
+
+        const messages = [
+            {
+                img: "./assets/b1.jpg",
+                text: "Chúc bé một ngày 20/10 thật hạnh phúc và trọn vẹn 💗"
+            },
+            {
+                img: "./assets/b2.jpg",
+                text: "Luôn vui vẻ, xinh đẹp và học giỏiiii 💗💗"
+            },
+            {
+                img: "./assets/b3.jpg",
+                text: "Mong bé lúc nào cũng được bao quanh bởi nụ cười và niềm vui 💗"
+            },
+            {
+                img: "./assets/b4.jpg",
+                text: "Bé luôn tươi cười như ngày hôm nay nhé 💗"
+            },
+            {
+                img: "./assets/b5.jpg",
+                text: "Mỗi ngày của bé đều là một đóa hoa tươi nở rộ 🌷"
+            },
+            {
+                img: "./assets/b6.jpg",
+                text: "Bé là món quà tuyệt vời nhất mà cuộc sống mang lại 💗"
+            },
+            {
+                img: "./assets/b7.jpg",
+                text: "Cảm ơn bé vì đã luôn mạnh mẽ và tuyệt vời như thế 💗"
+            },
+            {
+                img: "./assets/b8.jpg",
+                text: "Anh mong mọi điều tốt đẹp nhất sẽ đến với bé hôm nay và mãi về sau 💕"
+            },
+            {
+                img: "./assets/b9.jpg",
+                text: "Bé là ánh sáng nhỏ khiến mọi ngày của anh đều rực rỡ hơn 💗"
+            },
+            {
+                img: "./assets/b10.jpg",
+                text: "Bé mãi là cô gái đáng yêu, dịu dàng và ấm áp nhất trong lòng anh 💖"
+            }
+        ];
+
+        const gallery = document.getElementById("gallery");
+        const overlay = document.getElementById("overlay");
+        const popupImage = document.getElementById("popupImage");
+        const popupMessage = document.getElementById("popupMessage");
+        const popupTitle = document.getElementById("popupTitle");
+        const closeBtn = document.getElementById("closeBtn");
+        const player = document.getElementById("player");
+
+        // Tạo 10 ảnh tự động từ danh sách messages.
+        messages.forEach((message, index) => {
+            const card = document.createElement("div");
+            card.className = "photo-card";
+            card.tabIndex = 0;
+            card.setAttribute("role", "button");
+            card.setAttribute("aria-label", `Mở lời chúc số ${index + 1}`);
+
+            const img = document.createElement("img");
+            img.src = message.img;
+            img.alt = `Ảnh kỷ niệm ${index + 1}`;
+            img.loading = "lazy";
+
+            // Hiện thông báo nếu đường dẫn ảnh không đúng.
+            img.onerror = () => {
+                img.alt = "Không tìm thấy ảnh";
+                img.style.objectFit = "contain";
+            };
+
+            const number = document.createElement("span");
+            number.className = "number";
+            number.textContent = `💗 ${index + 1}`;
+
+            card.appendChild(img);
+            card.appendChild(number);
+
+            card.addEventListener("click", () => {
+                showPopup(index);
+                playMusic();
+            });
+
+            card.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    showPopup(index);
+                    playMusic();
+                }
+            });
+
+            gallery.appendChild(card);
+        });
+
+        // Mở ảnh lớn và lời chúc tương ứng.
+        function showPopup(index) {
+            const message = messages[index];
+
+            popupTitle.textContent = `Lời chúc số ${index + 1} 💗`;
+            popupImage.src = message.img;
+            popupMessage.textContent = message.text;
+
+            overlay.classList.add("active");
+            closeBtn.focus();
+        }
+
+        // Đóng popup.
+        function closePopup() {
+            overlay.classList.remove("active");
+        }
+
+        closeBtn.addEventListener("click", closePopup);
+
+        // Bấm vùng tối bên ngoài hộp để đóng.
+        overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) {
+                closePopup();
+            }
+        });
+
+        // Nhấn Escape để đóng.
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closePopup();
+            }
+        });
+
+        // Trình duyệt thường yêu cầu người dùng tương tác
+        // trước khi cho phép phát nhạc.
+        function playMusic() {
+            if (player.paused) {
+                player.play().catch(() => {
+                    // Nếu trình duyệt chặn, người dùng có thể
+                    // bật nhạc sau khi cho phép phát.
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
